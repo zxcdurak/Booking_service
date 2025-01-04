@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Отели</title>
+    <link rel="shortcut icon" href="{{ url_for('static', path='images/favicon.png') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', path='styles/style.css') }}">
+  </head>
+<body>
+    <header>
+      <div class="header_div">
+        <img class="hotel_photo" src="{{url_for('static', path='images/hotel.png')}}" alt="">
+        Бронирование
+      </div>
+      <div class="header_div">
+        <span style="margin-right: 15px;">Выйти</span>
+        <span><a id="my_bookings" href="http://127.0.0.1:8000/my_bookings">Мои брони</a></span>
+      </div> 
+    </header>
+    <hr> 
+    <main>
+
+      <div>
+        <input placeholder=" Место" class="search" type="text" id="search_button">
+        С
+        <input type="date" name="date_from" id="date_from">
+        До
+        <input type="date" name="date_to" id="date_to">
+        <input type="button" value="Поиск" class="search_button">
+      </div>
+
+      <hr>
+    <div class="hotels_div">
+        {% for hotel in hotels %}
+        <div class="hotel_div">
+            <img style="display: inline-block; border-top-left-radius: 5px; border-bottom-left-radius: 2px;" src="{{ url_for('static', path='images/' + hotel.image_id|string + '.webp') }}"
+            alt="Фото отеля" width="200px">
+            <div style="margin-left: 15px; display: inline-block; margin-right: 15px; margin-bottom: 15px;">
+            <h1>{{hotel.name}}</h1>
+            <div>📍 {{hotel.location}}</div>
+            <div>🟢 {{hotel.rooms_left}} из {{hotel.rooms_quantity}} свободных комнат</div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</main>
+</body>
+<script src="{{url_for('static', path='scripts/script.js')}}"></script>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мои Бронирования</title>
+</head>
+<body>
+    {% for booking in bookings %}
+    <div class="hotel_div">
+        <img style="display: inline-block; border-top-left-radius: 5px; border-bottom-left-radius: 2px;" src="{{ url_for('static', path='images/' + hotel.image_id|string + '.webp') }}"
+        alt="Фото отеля" width="200px">
+        <div style="margin-left: 15px; display: inline-block; margin-right: 15px; margin-bottom: 15px;">
+        <h1>{{hotel.name}}</h1>
+        <div>📍 {{hotel.location}}</div>
+        <div>🟢 {{hotel.rooms_left}} из {{hotel.rooms_quantity}} свободных комнат</div>
+        </div>
+</body>
+</html>
