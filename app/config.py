@@ -8,8 +8,15 @@ class Settings(BaseSettings):
     DB_USER: str
     DB_PASS: str
     DB_NAME: str
+
     SECRET_KEY: str
     ALGORITM: str
+
+    SMTP_HOST: str
+    SMTP_PORT: int
+    SMPT_USER: str
+    SMPT_PASS: str
+
 
     @root_validator(pre=False, skip_on_failure=True)
     def get_database_url(cls, v):
