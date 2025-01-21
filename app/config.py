@@ -14,9 +14,11 @@ class Settings(BaseSettings):
 
     SMTP_HOST: str
     SMTP_PORT: int
-    SMPT_USER: str
-    SMPT_PASS: str
+    SMTP_USER: str
+    SMTP_PASS: str
 
+    REDIS_HOST: str
+    REDIS_PORT: int
 
     @root_validator(pre=False, skip_on_failure=True)
     def get_database_url(cls, v):
