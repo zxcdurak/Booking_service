@@ -10,6 +10,7 @@ from fastapi_cache.decorator import cache
 
 from redis import asyncio as aioredis
 
+
 from app.bookings.router import router as router_booking
 from app.users.router import router_user, router_auth
 from app.hotels.rooms.router import router as router_hotels
@@ -17,6 +18,11 @@ from app.pages.router import router as router_pages
 from app.images.router import router as router_images
 
 from app.config import settings
+
+from app.admin.views import BookingsAdmin, HotelsAdmin, RoomsAdmin, UsersAdmin
+from sqladmin import Admin
+from app.database import engine
+from app.admin.auth import authentication_backend
 
 @asynccontextmanager
 async def lifespan(_: FastAPI) -> AsyncIterator[None]:
@@ -47,4 +53,12 @@ app.add_middleware(
     allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allow_headers=["Content-Type", "Set-Cookie", "Access-Control-Allow-Headers", "Access-Control-Allow-Origin", "Authorization"]
 )
+
+admin = Admin(app, engine, authentication_backend=authentication_backend)
+
+admin.add_view(UsersAdmin)
+admin.add_view(BookingsAdmin)
+admin.add_view(RoomsAdmin)
+admin.add_view(HotelsAdmin)
+
 
