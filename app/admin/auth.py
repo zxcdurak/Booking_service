@@ -4,7 +4,7 @@ from starlette.responses import RedirectResponse
 
 from app.users.auth import authenticate_user, create_access_token
 from app.users.dependencies import get_current_user
-
+from app.config import settings
 
 class AdminAuth(AuthenticationBackend):
     async def login(self, request: Request) -> bool:
@@ -32,4 +32,6 @@ class AdminAuth(AuthenticationBackend):
         if not user:
             return RedirectResponse(request.url_for("admin:login"), status_code=302)
         return True
-authentication_backend = AdminAuth(secret_key="...")
+    
+    
+authentication_backend = AdminAuth(secret_key=settings.ADMIN_AUTH_KEY)

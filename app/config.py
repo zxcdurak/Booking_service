@@ -20,6 +20,8 @@ class Settings(BaseSettings):
     REDIS_HOST: str
     REDIS_PORT: int
 
+    ADMIN_AUTH_KEY: str
+
     @root_validator(pre=False, skip_on_failure=True)
     def get_database_url(cls, v):
         v["DATABASE_URL"] = f"postgresql+asyncpg://{v['DB_USER']}:{v['DB_PASS']}@{v['DB_HOST']}:{v['DB_PORT']}/{v['DB_NAME']}"
